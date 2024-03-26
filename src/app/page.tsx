@@ -1,23 +1,22 @@
 import { HomePage } from "@/component/HomePage";
-import { client } from "@/utils/client";
+import { getProject } from "@/utils/client";
 // import { Animals } from "../component/AnimalCards";
 
 export default  async function Home() {
-  // const animal = await client.fetch <any[]>(`*[_type == "animal"]`)
-  // const wild = await client.fetch <any[]>(`*[_type == "wild"]`)
-  const page = await client.fetch <any[]>(`*[_type == "page"]{
-    pageBulider[]{
+  // const animal = await client.fetch <any[]>(*[_type == "animal"])
+  const page = await getProject<any[]>(`*[_type == "page"]{
+    pageBuilder[]{
       _type == "hero" => {
+        _id,
         _type,
         title,
         subtitle,
         button1,
-        button2,
-        heroimage
-      },
+        button2
+    }
     }
   }`)
-  console.log(page)
+  console.log(page);
   
   return (
     <main>
