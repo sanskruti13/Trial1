@@ -1,27 +1,18 @@
 import { HomePage } from "@/component/HomePage";
 import { getProject } from "@/utils/client";
-// import { Animals } from "../component/AnimalCards";
 
 export default  async function Home() {
-  // const animal = await client.fetch <any[]>(*[_type == "animal"])
-  const page = await getProject<any[]>(`*[_type == "page"]{
-    pageBuilder[]{
-      _type == "hero" => {
-        _id,
-        _type,
-        title,
-        subtitle,
-        button1,
-        button2
-    }
-    }
-  }`)
-  console.log(page);
-  
+
+  const allPages = await getProject();
+  // console.log(allPages);
+// const allPagesWithForEach = allPages.filter(ele => ele._type == 'page') 
+// console.log(allPagesWithForEach)
+// // const heroPage =  allPagesWithForEach.filter(ele => ele._type == 'hero')
+// // console.log(heroPage)
+
   return (
     <main>
-     {/* <Animals pet={wild} /> */}
-     <HomePage page={page}/>
+     <HomePage page={allPages}/>
     </main>
   );
 }
